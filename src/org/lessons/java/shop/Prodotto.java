@@ -1,5 +1,7 @@
 package org.lessons.java.shop;
 
+import java.util.Random;
+
 public class Prodotto {
 
 	private int codice;
@@ -9,12 +11,21 @@ public class Prodotto {
 	private int iva;
 	
 	
-		public Prodotto(int codice, String nome, String descrizione, float prezzo, int iva) {
-			setCodice(codice);
+		public Prodotto(String nome, String descrizione, float prezzo, int iva) {
+			setCodice(rndNumber());
 			setNome(nome);
 			setDescrizione(descrizione);
 			setPrezzo(prezzo);
 			setIva(iva);
+		}
+		
+//		Metodi
+		private int rndNumber() {
+			Random in = new Random();
+			return in.nextInt();
+		}
+		public String getFullName() {
+			return codice + "-" + nome;
 		}
 		
 //		Codice
@@ -56,4 +67,16 @@ public class Prodotto {
 		public void setIva(int iva) {
 			this.iva = iva;
 		}
+		
+		@Override
+		public String toString() {
+			return "Il codice del prodotto è: " + codice + "\n"
+					+ "Il nome del prodotto è: " + nome + "\n"
+					+ "La sua descrizione: " + descrizione + "\n"
+					+ "Il suo prezzo è: " + prezzo + "\n"
+					+ "Con un iva di: " + iva + "%\n"
+					+ "Il nome esteso è: " + getFullName() + "\n";
+		}
+		
+		
 }
