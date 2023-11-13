@@ -62,6 +62,9 @@ public class Prodotto {
 			return prezzo;
 		}
 		public void setPrezzo(float prezzo) {
+			if(prezzo <= 0) {
+				return ;
+			}
 			this.prezzo = prezzo;
 		}
 		public String getFullPrice() {
@@ -74,6 +77,9 @@ public class Prodotto {
 			return iva;
 		}
 		public void setIva(int iva) {
+			if(iva <= 0 || iva > 100) {
+				return ;
+			}
 			this.iva = iva;
 		}
 		
@@ -85,7 +91,7 @@ public class Prodotto {
 					+ "Il suo prezzo è: " + prezzo + "€\n"
 					+ "Con un iva di: " + iva + "%\n"
 					+ "Il nome esteso è: " + getFullName() + "\n"
-					+ "Il prezzo compreso di iva è: " + getFullPrice() + "\n"
+					+ "Il prezzo compreso di iva è: " + getFullPrice() + "€\n"
 					+ "Il codice con pad left è: " + getPaddedCode() + "\n";
 		}
 		
