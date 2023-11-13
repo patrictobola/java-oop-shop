@@ -1,5 +1,7 @@
 package org.lessons.java.shop;
 
+//aggiunto il Locale per sfizio di avere il punto invece di virgola come separatore
+import java.util.Locale;
 import java.util.Random;
 
 public class Prodotto {
@@ -19,13 +21,10 @@ public class Prodotto {
 			setIva(iva);
 		}
 		
-//		Metodi
+//		Altri metodi
 		private int rndNumber() {
 			Random in = new Random();
-			return in.nextInt();
-		}
-		public String getFullName() {
-			return codice + "-" + nome;
+			return in.nextInt(9_999_999);
 		}
 		
 //		Codice
@@ -35,6 +34,9 @@ public class Prodotto {
 		private void setCodice(int codice) {
 			this.codice = codice;
 		}
+		public String getPaddedCode() {
+			return String.format("%08d", codice);
+		}
 		
 //		Nome
 		public String getNome() {
@@ -42,6 +44,9 @@ public class Prodotto {
 		}
 		public void setNome(String nome) {
 			this.nome = nome;
+		}
+		public String getFullName() {
+			return codice + "-" + nome;
 		}
 
 //		Descrizione
@@ -59,6 +64,10 @@ public class Prodotto {
 		public void setPrezzo(float prezzo) {
 			this.prezzo = prezzo;
 		}
+		public String getFullPrice() {
+			float fullPrice = prezzo + (prezzo * iva / 100);
+			return String.format(Locale.US, "%.2f", fullPrice);
+		}
 		
 //		Iva
 		public int getIva() {
@@ -73,9 +82,11 @@ public class Prodotto {
 			return "Il codice del prodotto è: " + codice + "\n"
 					+ "Il nome del prodotto è: " + nome + "\n"
 					+ "La sua descrizione: " + descrizione + "\n"
-					+ "Il suo prezzo è: " + prezzo + "\n"
+					+ "Il suo prezzo è: " + prezzo + "€\n"
 					+ "Con un iva di: " + iva + "%\n"
-					+ "Il nome esteso è: " + getFullName() + "\n";
+					+ "Il nome esteso è: " + getFullName() + "\n"
+					+ "Il prezzo compreso di iva è: " + getFullPrice() + "\n"
+					+ "Il codice con pad left è: " + getPaddedCode() + "\n";
 		}
 		
 		
